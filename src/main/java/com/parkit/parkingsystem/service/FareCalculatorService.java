@@ -8,6 +8,7 @@ import com.parkit.parkingsystem.model.Ticket;
 public class FareCalculatorService {
 
 	public void calculateFare(Ticket ticket, int recurring) throws Exception {
+		//if the exit ticket is = 0, we check that the exit time is less than the entry time
 		if ((ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime()))) {
 			throw new IllegalArgumentException("Out time provided is incorrect:" + ticket.getOutTime().toString());
 		}
@@ -38,7 +39,6 @@ public class FareCalculatorService {
 
 		}
 		case BIKE: {
-			// parking bike Free With Less Than 30Min
 			if (hourNbr < 0.5) {
 				ticket.setPrice(0);
 
