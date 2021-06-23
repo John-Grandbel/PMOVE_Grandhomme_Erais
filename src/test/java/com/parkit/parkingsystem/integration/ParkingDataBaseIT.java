@@ -1,6 +1,6 @@
 package com.parkit.parkingsystem.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
@@ -22,6 +22,8 @@ import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
 import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.service.ParkingService;
 import com.parkit.parkingsystem.util.InputReaderUtil;
+
+import junit.framework.Assert;
 
 @ExtendWith(MockitoExtension.class)
 public class ParkingDataBaseIT {
@@ -81,10 +83,10 @@ public class ParkingDataBaseIT {
 		statement1.setInt(1, 1);
 		ResultSet rs1 = statement1.executeQuery();
 		rs1.next();
-
-		assertThat(rs.getString(1)).isEqualTo("ABCDEF");
-
-		assertThat(rs1.getInt(1)).isEqualTo(0);
+		Assert.assertEquals(rs.getString(1), "ABCDEF");
+		
+		Assert.assertEquals(rs1.getInt(1), 0);
+		
 	}
 
 	@Test
@@ -111,9 +113,10 @@ public class ParkingDataBaseIT {
 		ResultSet rs3 = statement3.executeQuery();
 		rs3.next();
 
-		assertThat(rs2.getDouble(1)).isEqualTo(ticketDAO.getTicket("ABCDEF").getPrice());
-
-		assertThat(rs3.getTimestamp(1)).isEqualTo(ticketDAO.getTicket("ABCDEF").getOutTime());
+		
+		Assert.assertEquals(rs2.getDouble(1), "ABCDEF");
+		
+		Assert.assertEquals(rs3.getTimestamp(1), "ABCDEF");
 	}
 
 }
